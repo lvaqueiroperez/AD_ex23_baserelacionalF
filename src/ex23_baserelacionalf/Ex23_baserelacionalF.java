@@ -51,22 +51,17 @@ public class Ex23_baserelacionalF {
              */
             CallableStatement calS = conn.prepareCall("{call pjavaprocoracle(?,?)}");
             //especificamos los parámetros de entrada
-            calS.setInt(1, 5);
-            calS.setInt(1, 6);
+            calS.setInt(1, 10);
+            calS.setInt(2, 10);
 
             //registramos los parámetros de salida:
-            calS.registerOutParameter("salida", Types.INTEGER);
+            //Params: posición relativa a su "?" y tipo 
+            calS.registerOutParameter(2, Types.INTEGER);
 
             //recibimos los resultados:
             calS.execute();
 
-            ResultSet rs = calS.getResultSet();
-            
-            while (rs.next()) {
-
-                System.out.println(rs.getString());
-
-            }
+            System.out.println(calS.getInt(2));
 
         } catch (SQLException ex) {
             Logger.getLogger(Ex23_baserelacionalF.class.getName()).log(Level.SEVERE, null, ex);
